@@ -125,7 +125,7 @@ export function Footer() {
           </div>
         </div>
         <div className="relative lg:col-span-6" data-fade>
-          <div data-clip className="relative aspect-[4/3] overflow-hidden rounded-[32px]"><Image data-clip-img src="/img/kova-card.webp" alt="" fill sizes="(min-width:1024px) 45vw, 100vw" className="object-cover" /></div>
+          <div data-clip className="relative aspect-[4/3] overflow-hidden rounded-[32px]"><Image data-clip-img src="/img/kova-edge.webp" alt="" fill sizes="(min-width:1024px) 45vw, 100vw" className="object-cover" /></div>
         </div>
       </div>
       <div className="wrap flex flex-col justify-between gap-3 border-t border-cream/10 py-8 text-[13px] text-cream/60 md:flex-row">
