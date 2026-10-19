@@ -88,7 +88,7 @@ export default function Morph() {
               <div className="m-phone absolute inset-y-0 left-[380px] w-[340px] opacity-0"><Phone /></div>
             </div>
             <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[340px] flex-col justify-center gap-4 lg:flex">
-              {[["Instant", "Sends land in seconds"], ["0.2%", "Above mid-market, flat"], ["40+", "Currencies, one card"]].map(([a, b]) => <div key={a} className="m-side ml-auto w-[260px] rounded-[22px] bg-cream p-5 text-ink opacity-0"><p className="display text-[36px]">{a}</p><p className="text-[14px] text-mute">{b}</p></div>)}
+              {[["Instant", "Sends between Kova users"], ["Upfront", "Fee shown before you send"], ["One card", "Spends in any balance"]].map(([a, b]) => <div key={a} className="m-side ml-auto w-[260px] rounded-[22px] bg-cream p-5 text-ink opacity-0"><p className="display text-[36px]">{a}</p><p className="text-[14px] text-mute">{b}</p></div>)}
             </div>
           </div>
           </div>

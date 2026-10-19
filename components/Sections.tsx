@@ -94,16 +94,20 @@ export function Stats() {
   return (
     <section className="bg-flare py-[clamp(88px,10vw,150px)] text-ink">
       <div className="wrap grid gap-10 md:grid-cols-3">
-        {[[2.1, "M", "people moving money", 1], [18, "B", "€ sent across borders", 0], [4.9, "★", "average app rating", 1]].map(([v, s, l, d]) => (
-          <div key={l as string} className="border-t border-ink/25 pt-6" data-fade>
-            <p className="display text-[clamp(84px,10vw,160px)]"><span data-count={v as number} data-dec={d as number}>0</span>{s as string}</p>
-            <p className="mt-2 text-[17px]">{l as string}</p>
+        {[["People moving money"], ["Sent across borders"], ["Average app rating"]].map(([l]) => (
+          <div key={l} className="border-t border-ink/25 pt-6" data-fade>
+            <p className="display text-[clamp(84px,10vw,160px)] text-ink/35" aria-label={`${l}: placeholder until launch`}>—</p>
+            <p className="mt-2 text-[17px]">{l}</p>
+            <p className="mono mt-1 text-[12px] uppercase tracking-[.12em] text-ink/60">Placeholder · real figure at launch</p>
           </div>
         ))}
       </div>
       <div className="wrap mt-16 grid items-center gap-8 md:grid-cols-12">
-        <blockquote className="display text-[clamp(30px,3.6vw,56px)] md:col-span-8" data-reveal="words">“I get paid in dollars, pay rent in euros and send home in rupees. Kova is the first app where that feels normal.”</blockquote>
-        <div className="flex items-center gap-4 md:col-span-4 md:justify-end"><span className="grid h-14 w-14 place-items-center rounded-full bg-ink text-cream display text-[22px]">S</span><div><p className="font-semibold">Sana Q.</p><p className="text-[14px] text-ink/70">Designer, Lisbon (fictional)</p></div></div>
+        <div className="md:col-span-7">
+          <p className="display text-[clamp(30px,3.6vw,56px)]" data-reveal="words">Paid in one currency, living in another. One app for all of it.</p>
+          <p className="mt-6 max-w-[520px] text-[17px] text-ink/75">Customer stories go here once Kova has customers. This is a concept; we don&apos;t publish quotes from people who don&apos;t exist.</p>
+        </div>
+        <div data-clip className="relative aspect-[4/3] overflow-hidden rounded-[32px] md:col-span-5"><Image data-clip-img src="/img/kova-phone.webp" alt="Kova app on a phone beside a Kova card" fill sizes="(min-width:768px) 40vw, 100vw" className="object-cover object-[50%_30%]" /></div>
       </div>
     </section>
   );
