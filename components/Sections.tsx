@@ -114,7 +114,7 @@ export function Footer() {
     <footer id="get" className="bg-ink text-cream">
       <div className="wrap grid items-center gap-12 py-[clamp(88px,10vw,150px)] lg:grid-cols-12">
         <div className="lg:col-span-6">
-          <h2 className="display text-[clamp(56px,8vw,128px)]" data-reveal="chars">Go borderless.</h2>
+          <h2 className="display text-[clamp(56px,7vw,128px)]" data-reveal="chars">Go borderless.</h2>
           <p className="mt-6 max-w-[40ch] text-[17px] text-cream/70" data-fade>Open an account in four minutes with a passport and a selfie.</p>
           <div className="mt-8 flex flex-wrap gap-3" data-fade>
             {["App Store", "Google Play"].map((s) => <a key={s} href="#" className="pill border border-cream/20 bg-cream text-ink"><span aria-hidden className="h-4 w-4 rounded-[4px] bg-ink" />{s}</a>)}

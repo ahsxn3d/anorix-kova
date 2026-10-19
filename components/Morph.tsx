@@ -48,6 +48,15 @@ function Phone() {
 
 export default function Morph() {
   const root = useRef<HTMLElement>(null);
+  const box = useRef<HTMLDivElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    // Fit the fixed 1100x700 stage into its column (and the viewport height) so the phone inset never collapses.
+    const b = box.current, st = stage.current; if (!b || !st) return;
+    const fit = () => { const s = Math.min(1, b.clientWidth / 1100, (window.innerHeight * 0.82) / 700); st.style.transform = `translateX(-50%) scale(${s})`; b.style.height = `${700 * s}px`; };
+    fit(); const ro = new ResizeObserver(fit); ro.observe(b); window.addEventListener("resize", fit);
+    return () => { ro.disconnect(); window.removeEventListener("resize", fit); };
+  }, []);
   useEffect(() => {
     const mm = gsap.matchMedia();
     mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
@@ -72,7 +81,8 @@ export default function Morph() {
           </ol>
         </div>
         <div className="relative lg:col-span-9">
-          <div className="relative mx-auto hidden h-[700px] w-[1100px] max-w-full origin-center scale-[.78] xl:scale-90 2xl:scale-100 lg:block">
+          <div ref={box} className="relative hidden w-full lg:block">
+          <div ref={stage} className="absolute left-1/2 top-0 h-[700px] w-[1100px] origin-top">
             <div className="m-frame absolute inset-0 overflow-hidden bg-paper">
               <div className="m-desk absolute inset-0"><Desktop /></div>
               <div className="m-phone absolute inset-y-0 left-[380px] w-[340px] opacity-0"><Phone /></div>
@@ -80,6 +90,7 @@ export default function Morph() {
             <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[340px] flex-col justify-center gap-4 lg:flex">
               {[["Instant", "Sends land in seconds"], ["0.2%", "Above mid-market, flat"], ["40+", "Currencies, one card"]].map(([a, b]) => <div key={a} className="m-side ml-auto w-[260px] rounded-[22px] bg-cream p-5 text-ink opacity-0"><p className="display text-[36px]">{a}</p><p className="text-[14px] text-mute">{b}</p></div>)}
             </div>
+          </div>
           </div>
           <div className="mx-auto h-[640px] w-[320px] overflow-hidden rounded-[44px] border-[10px] border-ink bg-paper lg:hidden" data-fade><Phone /></div>
         </div>
