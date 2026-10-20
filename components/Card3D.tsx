@@ -73,7 +73,7 @@ function Rig({ mode, finish, flip }: { mode: Mode; finish: Finish; flip?: boolea
     if (mode === "stack") fan.current.forEach((c, i) => { if (!c) return; const s = (.55 + Math.sin(t * .5) * .1 + Math.max(0, st.pointer.x) * .3), a = (i - 1.5) * .22 * s; c.rotation.z += (a - c.rotation.z) * k; c.position.x += ((i - 1.5) * .42 * s - c.position.x) * k; c.position.y += (-Math.abs(i - 1.5) * .12 * s - c.position.y) * k; });
   });
   return (<group ref={g}>
-    {mode === "hero" && <><group scale={.82}><CardMesh finish="metal" position={[.08, .26, -.25]} rotation={[0, 0, .14]} /><CardMesh finish={finish} position={[-.04, -.06, 0]} rotation={[0, 0, -.12]} /></group></>}
+    {mode === "hero" && <><group scale={1.02}><CardMesh finish="metal" position={[.08, .26, -.25]} rotation={[0, 0, .14]} /><CardMesh finish={finish} position={[-.04, -.06, 0]} rotation={[0, 0, -.12]} /></group></>}
     {mode === "single" && <CardMesh finish={finish} />}
     {mode === "stack" && (["lilac", "ink", "metal", "flare"] as Finish[]).map((f, i) => <group key={f} ref={(e) => { if (e) fan.current[i] = e; }} position-z={i * .03}><CardMesh finish={f} /></group>)}
     {mode === "phone" && <><Phone rotation={[0, .25, 0]} position={[-.3, 0, 0]} /><CardMesh finish={finish} scale={.62} position={[.45, -.45, .25]} rotation={[-.2, -.35, .25]} /></>}
