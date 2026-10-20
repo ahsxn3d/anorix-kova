@@ -22,7 +22,7 @@ export default function Hero() {
         </div>
         <div className="relative h-[52vh] min-h-[380px] lg:col-span-6 lg:h-[78vh]">
           <div data-clip className="absolute inset-0 overflow-hidden rounded-[36px] bg-[#e4e1ef]">
-            <Card3D mode="hero" z={4} />
+            <Card3D mode="hero" z={4.6} />
           </div>
           <div className="absolute bottom-5 left-5 rounded-[20px] bg-paper/95 p-4 shadow-xl" data-fade data-delay="0.8">
             <p className="text-[12px] text-mute">You send</p><p className="display text-[28px]">€1,000.00</p>

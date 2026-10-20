@@ -59,6 +59,7 @@ function Phone(p: ThreeElements["group"]) {
   }, []);
   return (<group {...p}><mesh geometry={body}><meshPhysicalMaterial color="#1c1724" metalness={.8} roughness={.3} clearcoat={1} /></mesh><mesh position-z={.041} material={scr}><planeGeometry args={[.72, 1.49]} /></mesh></group>);
 }
+function Fit({ z, k, skip }: { z: number; k: number; skip?: boolean }) { const { camera, size } = useThree(); useEffect(() => { if (skip) return; const a = size.width / Math.max(1, size.height); camera.position.z = z * Math.max(1, k / a); camera.updateProjectionMatrix(); }, [camera, size, z, k, skip]); return null; }
 export type Mode = "hero" | "stack" | "single" | "phone";
 function Rig({ mode, finish, flip }: { mode: Mode; finish: Finish; flip?: boolean }) {
   const g = useRef<THREE.Group>(null!), drag = useRef({ on: false, x: 0, v: 0, a: 0 }), { gl } = useThree();
@@ -72,7 +73,7 @@ function Rig({ mode, finish, flip }: { mode: Mode; finish: Finish; flip?: boolea
     if (mode === "stack") fan.current.forEach((c, i) => { if (!c) return; const s = (.55 + Math.sin(t * .5) * .1 + Math.max(0, st.pointer.x) * .3), a = (i - 1.5) * .22 * s; c.rotation.z += (a - c.rotation.z) * k; c.position.x += ((i - 1.5) * .42 * s - c.position.x) * k; c.position.y += (-Math.abs(i - 1.5) * .12 * s - c.position.y) * k; });
   });
   return (<group ref={g}>
-    {mode === "hero" && <><CardMesh finish="metal" position={[.12, .3, -.25]} rotation={[0, 0, .18]} /><CardMesh finish={finish} rotation={[0, 0, -.12]} /></>}
+    {mode === "hero" && <><group scale={.82}><CardMesh finish="metal" position={[.08, .26, -.25]} rotation={[0, 0, .14]} /><CardMesh finish={finish} position={[-.04, -.06, 0]} rotation={[0, 0, -.12]} /></group></>}
     {mode === "single" && <CardMesh finish={finish} />}
     {mode === "stack" && (["lilac", "ink", "metal", "flare"] as Finish[]).map((f, i) => <group key={f} ref={(e) => { if (e) fan.current[i] = e; }} position-z={i * .03}><CardMesh finish={f} /></group>)}
     {mode === "phone" && <><Phone rotation={[0, .25, 0]} position={[-.3, 0, 0]} /><CardMesh finish={finish} scale={.62} position={[.45, -.45, .25]} rotation={[-.2, -.35, .25]} /></>}
@@ -81,6 +82,6 @@ function Rig({ mode, finish, flip }: { mode: Mode; finish: Finish; flip?: boolea
 export default function Card3D({ mode = "hero", finish = "flare", flip, z = 3.4, className = "absolute inset-0" }: { mode?: Mode; finish?: Finish; flip?: boolean; z?: number; className?: string }) {
   const el = useRef<HTMLDivElement>(null), [on, setOn] = useState(false), [ready, setReady] = useState(false);
   useEffect(() => { document.fonts?.ready.then(() => setReady(true)); const io = new IntersectionObserver(([e]) => setOn(e.isIntersecting), { rootMargin: "10% 0px" }); io.observe(el.current!); return () => io.disconnect(); }, []);
-  return (<div ref={el} className={className} style={{ cursor: mode === "single" ? "grab" : undefined, touchAction: "pan-y" }}>{ready && <Canvas frameloop={on ? "always" : "never"} dpr={[1, 1.75]} camera={{ position: [0, 0, z], fov: 30 }} gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}>
+  return (<div ref={el} className={className} style={{ cursor: mode === "single" ? "grab" : undefined, touchAction: "pan-y" }}>{ready && <Canvas frameloop={on ? "always" : "never"} dpr={[1, 1.75]} camera={{ position: [0, 0, z], fov: 30 }} gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}><Fit z={z} k={1.25} />
     <Env /><directionalLight position={[2, 3, 4]} intensity={1.4} /><directionalLight position={[-3, -1, 2]} intensity={.5} color="#ffb59c" /><Rig mode={mode} finish={finish} flip={flip} /></Canvas>}</div>);
 }
