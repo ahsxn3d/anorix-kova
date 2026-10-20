@@ -1,0 +1,7 @@
+import { Head } from "@/components/UI";
+import C3 from "@/components/Card3DClient";
+export const metadata = { title: "The app — Kova" };
+export default function Page() { return (<main><Head k="The app" title={<>Every balance,<br /><span className="text-flare">one thumb.</span></>} lead="Kova is designed phone-first: balances, cards, sends and receipts in four tabs." />
+  <section className="bg-cream pb-[clamp(80px,10vw,140px)]"><div className="wrap grid gap-10 lg:grid-cols-12 lg:items-center"><div className="relative h-[620px] overflow-hidden rounded-[36px] bg-[#ffd2c4] lg:col-span-7"><C3 mode="phone" finish="flare" z={3.3} /></div>
+    <div className="lg:col-span-5"><ol className="space-y-5">{[["Home", "Your total across every currency, and what changed today."], ["Cards", "Freeze, limits, virtual cards and the PIN, one screen each."], ["Send", "Rate, fee and arrival time before you confirm."], ["Insights", "Spending by currency and by country, no spreadsheet."]].map(([h, p], i) => <li key={h} className="card-ui p-6"><span className="text-[13px] text-flare">0{i + 1}</span><p className="display mt-1 text-[30px]">{h}</p><p className="mt-1 text-[15px] text-ink/65">{p}</p></li>)}</ol>
+      <div className="mt-8 flex flex-wrap gap-3">{["App Store", "Google Play"].map((s) => <span key={s} className="pill bg-ink text-cream"><span className="h-4 w-4 rounded-[4px] bg-cream" />{s} · soon</span>)}</div></div></div></section></main>); }

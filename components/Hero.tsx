@@ -1,5 +1,6 @@
 "use client";
-import Image from "next/image";
+import dynamic from "next/dynamic";
+const Card3D = dynamic(() => import("./Card3D"), { ssr: false });
 import { useRef } from "react";
 import { Arrow } from "./kit/ui";
 
@@ -15,13 +16,13 @@ export default function Hero() {
           </h1>
           <p className="kit-soft mt-7 max-w-[440px] text-[18px] leading-relaxed text-ink/70">Hold, spend and send 40+ currencies from one account and one card. Real exchange rates, no surprise fees, built for lives that cross borders.</p>
           <div className="kit-soft mt-9 flex flex-wrap gap-3">
-            <a href="#get" className="pill bg-ink text-cream">Get the app <Arrow /></a>
-            <a href="#app" className="pill border border-ink/15">See it fold</a>
+            <a href="/cards" className="pill bg-ink text-cream">Choose a card <Arrow /></a>
+            <a href="/send" className="pill border border-ink/15">Try the calculator</a>
           </div>
         </div>
         <div className="relative h-[52vh] min-h-[380px] lg:col-span-6 lg:h-[78vh]">
           <div data-clip className="absolute inset-0 overflow-hidden rounded-[36px] bg-[#e4e1ef]">
-            <Image data-clip-img src="/img/kova-card.webp" alt="Kova cards in flare and plum" fill priority sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
+            <Card3D mode="hero" z={4} />
           </div>
           <div className="absolute bottom-5 left-5 rounded-[20px] bg-paper/95 p-4 shadow-xl" data-fade data-delay="0.8">
             <p className="text-[12px] text-mute">You send</p><p className="display text-[28px]">€1,000.00</p>

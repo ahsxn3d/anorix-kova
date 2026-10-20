@@ -1,19 +1,7 @@
-import Image from "next/image";
+"use client";
+import dynamic from "next/dynamic";
+const Card3D = dynamic(() => import("./Card3D"), { ssr: false });
 import { Arrow, Marquee } from "./kit/ui";
-
-export function Nav() {
-  return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      <div className="wrap flex items-center justify-between pt-4">
-        <a href="#" className="display rounded-full bg-paper/90 px-4 py-2 text-[24px] shadow-sm backdrop-blur" aria-label="Kova home">kova<span className="text-flare">.</span></a>
-        <nav aria-label="Primary" className="hidden gap-1 rounded-full bg-paper/90 p-1 text-[14px] shadow-sm backdrop-blur md:flex">
-          {[["App", "#app"], ["Currencies", "#fx"], ["Cards", "#cards"], ["Security", "#features"]].map(([l, h]) => <a key={l} href={h} className="rounded-full px-4 py-2 transition-colors hover:bg-ink hover:text-cream">{l}</a>)}
-        </nav>
-        <a href="#get" className="pill bg-flare !py-2.5 text-ink">Open account</a>
-      </div>
-    </header>
-  );
-}
 
 const cur = [["EUR", "€"], ["USD", "$"], ["GBP", "£"], ["PKR", "₨"], ["AED", "د.إ"], ["JPY", "¥"], ["TRY", "₺"], ["INR", "₹"], ["CHF", "₣"], ["SAR", "﷼"], ["CAD", "$"], ["SGD", "$"]];
 export function Currencies() {
@@ -36,7 +24,7 @@ export function Currencies() {
             <div className="mt-5 grid grid-cols-3 gap-3 text-[13px]">
               {[["Rate", "324.18"], ["Fee", "€2.00"], ["Arrives", "Seconds"]].map(([a, b]) => <div key={a} className="rounded-2xl border border-ink/10 p-3"><p className="text-mute">{a}</p><p className="mt-1 font-semibold">{b}</p></div>)}
             </div>
-            <a href="#get" className="pill mt-5 w-full justify-center bg-flare text-ink">Send now <Arrow /></a>
+            <a href="/send" className="pill mt-5 w-full justify-center bg-flare text-ink">Open the calculator <Arrow /></a>
           </div>
         </div>
       </div>
@@ -56,7 +44,7 @@ export function Features() {
         <div className="mt-14 grid gap-4 md:grid-cols-6">
           <article className="card-ui relative overflow-hidden md:col-span-4 md:row-span-2" data-fade>
             <div data-clip className="relative aspect-[4/3] md:aspect-auto md:h-full md:min-h-[560px]">
-              <Image data-clip-img src="/img/kova-card.webp" alt="Kova cards in flare and plum" fill sizes="(min-width:768px) 60vw, 100vw" className="object-cover" />
+              <div className="absolute inset-0 bg-[#e4e1ef]"><Card3D mode="single" finish="flare" z={3} /></div>
             </div>
             <div className="absolute left-6 top-6 max-w-[300px]"><h3 className="display text-[40px]">A card that travels light.</h3><p className="mt-2 text-[15px] text-ink/70">Virtual in a tap, metal in a week.</p></div>
           </article>
@@ -79,7 +67,7 @@ export function Showcase() {
   return (
     <section id="cards" className="relative bg-ink text-cream">
       <div data-clip className="relative h-[90svh] min-h-[560px] overflow-hidden">
-        <Image data-clip-img src="/img/kova-stack.webp" alt="Four Kova card finishes fanned out" fill sizes="100vw" className="object-cover" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,#2a1f3d,#17121f_70%)]"><Card3D mode="stack" z={4.2} /></div>
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
         <div className="wrap absolute inset-x-0 bottom-0 pb-14">
           <h2 className="display max-w-[12ch] text-[clamp(52px,8vw,132px)]" data-reveal="lines">Four finishes. One account.</h2>
@@ -107,31 +95,9 @@ export function Stats() {
           <p className="display text-[clamp(30px,3.6vw,56px)]" data-reveal="words">Paid in one currency, living in another. One app for all of it.</p>
           <p className="mt-6 max-w-[520px] text-[17px] text-ink/75">Customer stories go here once Kova has customers. This is a concept; we don&apos;t publish quotes from people who don&apos;t exist.</p>
         </div>
-        <div data-clip className="relative aspect-[4/3] overflow-hidden rounded-[32px] md:col-span-5"><Image data-clip-img src="/img/kova-phone.webp" alt="Kova app on a phone beside a Kova card" fill sizes="(min-width:768px) 40vw, 100vw" className="object-cover object-[50%_30%]" /></div>
+        <div data-clip className="relative aspect-[4/3] overflow-hidden rounded-[32px] md:col-span-5"><div className="absolute inset-0 bg-[#ffd2c4]"><Card3D mode="phone" finish="metal" z={3.4} /></div></div>
       </div>
     </section>
   );
 }
 
-export function Footer() {
-  return (
-    <footer id="get" className="bg-ink text-cream">
-      <div className="wrap grid items-center gap-12 py-[clamp(88px,10vw,150px)] lg:grid-cols-12">
-        <div className="lg:col-span-6">
-          <h2 className="display text-[clamp(56px,7vw,128px)]" data-reveal="chars">Go borderless.</h2>
-          <p className="mt-6 max-w-[40ch] text-[17px] text-cream/70" data-fade>Open an account in four minutes with a passport and a selfie.</p>
-          <div className="mt-8 flex flex-wrap gap-3" data-fade>
-            {["App Store", "Google Play"].map((s) => <a key={s} href="#" className="pill border border-cream/20 bg-cream text-ink"><span aria-hidden className="h-4 w-4 rounded-[4px] bg-ink" />{s}</a>)}
-          </div>
-        </div>
-        <div className="relative lg:col-span-6" data-fade>
-          <div data-clip className="relative aspect-[4/3] overflow-hidden rounded-[32px]"><Image data-clip-img src="/img/kova-edge.webp" alt="" fill sizes="(min-width:1024px) 45vw, 100vw" className="object-cover" /></div>
-        </div>
-      </div>
-      <div className="wrap flex flex-col justify-between gap-3 border-t border-cream/10 py-8 text-[13px] text-cream/60 md:flex-row">
-        <span>© 2026 Kova. A concept project by Anorix, not a real financial institution.</span><span>Designed &amp; built by Anorix</span>
-      </div>
-      <p aria-hidden className="display select-none text-center text-[30vw] leading-[.75] text-flare">kova</p>
-    </footer>
-  );
-}

@@ -1,0 +1,3 @@
+import C3 from "@/components/Card3DClient";
+export const metadata = { title: "Order placed — Kova" };
+export default function Page() { return <main className="bg-cream pb-40 pt-[clamp(110px,11vw,160px)]"><div className="wrap grid gap-8 lg:grid-cols-2 lg:items-center"><div><h1 className="display text-[clamp(56px,8vw,128px)]">It&apos;s on<br /><span className="text-flare">its way.</span></h1><p className="mt-6 max-w-[42ch] text-[18px] text-ink/70">Demo order KV-DEMO-2026 received. In the real app your virtual card would be ready now. Nothing was charged.</p><a href="/" className="pill mt-8 bg-ink text-cream">Back home</a></div><div className="relative h-[460px] overflow-hidden rounded-[36px] bg-[#ffd2c4]"><C3 mode="hero" z={3.6} /></div></div></main>; }
